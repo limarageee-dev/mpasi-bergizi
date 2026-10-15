@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    color: #2D2833;
+    background-color: #FAF8F5;
+  }
+
+  ::selection {
+    background-color: #7B2B80;
+    color: #FFFFFF;
+  }
+}
+
+/* Custom modern utilities & animations */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center font-bold px-7 py-3.5 rounded-full bg-brand-600 text-white shadow-lg shadow-brand-600/30 hover:bg-brand-700 hover:shadow-brand-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 text-center;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center font-bold px-7 py-3.5 rounded-full bg-peach-500 text-white shadow-lg shadow-peach-500/30 hover:bg-peach-600 hover:shadow-peach-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 text-center;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center font-bold px-7 py-3.5 rounded-full border-2 border-brand-600 text-brand-600 hover:bg-brand-50 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 text-center;
+  }
+
+  .badge-tag {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-wide transition-colors;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card;
+  }
+}
+
+/* Glassmorphism effects */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Smooth gradient accents */
+.bg-gradient-brand {
+  background: linear-gradient(135deg, #7B2B80 0%, #A43FA9 60%, #FF6F61 100%);
+}
+
+.text-gradient-brand {
+  background: linear-gradient(135deg, #7B2B80 0%, #9E3AA7 50%, #FF6F61 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Reading content styling for Notion Blocks */
+.prose-mpasi {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #38303C;
+}
+
+.prose-mpasi h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #261228;
+  margin-top: 2.25rem;
+  margin-bottom: 1rem;
+  scroll-margin-top: 5rem;
+}
+
+.prose-mpasi h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #641F69;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  scroll-margin-top: 5rem;
+}
+
+.prose-mpasi p {
+  margin-bottom: 1.25rem;
+}
+
+.prose-mpasi ul, .prose-mpasi ol {
+  margin-top: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.prose-mpasi li {
+  margin-bottom: 0.5rem;
+}
+
+.prose-mpasi blockquote {
+  border-left: 4px solid #7B2B80;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  background-color: #FAF4FC;
+  border-radius: 0 1rem 1rem 0;
+  font-style: italic;
+  color: #551D59;
+}
+
+.prose-mpasi img {
+  border-radius: 1.25rem;
+  margin: 1.75rem auto;
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+}

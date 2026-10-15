@@ -1,0 +1,242 @@
+---
+// src/pages/blog/index.astro
+import Layout from '../../layouts/Layout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getAllPosts, getAllTags, isNotionConfigured } from '../../lib/notion';
+
+const posts = await getAllPosts();
+const tags = await getAllTags();
+
+const metaDescription =
+  'Kumpulan resep MPASI bergizi dan menu praktis untuk ibu rumah tangga. Pilihan menu 4 bintang, booster berat badan, dan tips meal prep mudah anti ribet.';
+---
+
+<Layout
+  title="Resep & Menu Praktis MPASI untuk Ibu Rumah Tangga | MPASI BERGIZI"
+  description={metaDescription}
+>
+  <!-- Blog Index Header -->
+  <section class="py-16 md:py-20 bg-gradient-to-b from-brand-50 to-warmbg border-b border-brand-100/70">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-brand-200 text-xs font-bold text-brand-700 shadow-sm mb-4">
+        <span>📖 Ensiklopedia Dapur Bunda</span>
+        {isNotionConfigured ? (
+          <span class="inline-flex items-center gap-1 text-[11px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Notion Live
+          </span>
+        ) : (
+          <span class="inline-flex items-center gap-1 text-[11px] bg-brand-100 text-brand-800 px-2 py-0.5 rounded-full font-bold">
+            ⚡ Demo Ready
+          </span>
+        )}
+      </div>
+
+      <h1 class="font-display font-extrabold text-3xl sm:text-5xl text-gray-900 tracking-tight">
+        Kumpulan Menu Praktis & Resep <span class="text-brand-600">MPASI Bergizi</span>
+      </h1>
+
+      <p class="mt-4 text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        Temukan inspirasi menu harian kaya protein hewani, panduan tekstur sesuai usia, dan trik meal prep hemat waktu untuk ibu rumah tangga.
+      </p>
+
+      <!-- Client-side Interactive Search & Tag Filters -->
+      <div class="mt-8 max-w-xl mx-auto relative">
+        <div class="relative flex items-center">
+          <input
+            type="text"
+            id="blog-search-input"
+            placeholder="Cari menu, misal: 'salmon', 'daging sapi', 'anti GTM'..."
+            class="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-white border border-brand-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent text-sm shadow-sm transition-all"
+          />
+          <svg class="w-5 h-5 text-gray-400 absolute left-4 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Tag Filters Pills -->
+      <div class="mt-6 flex flex-wrap justify-center items-center gap-2">
+        <button
+          type="button"
+          class="tag-filter-btn px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-brand-600 text-white shadow-sm"
+          data-tag="all"
+        >
+          Semua Menu ({posts.length})
+        </button>
+        {tags.map((tag) => (
+          <button
+            type="button"
+            class="tag-filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-white text-gray-700 hover:bg-brand-50 hover:text-brand-700 border border-brand-100 shadow-sm transition-all"
+            data-tag={tag}
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Post Grid Section -->
+  <section class="py-16 bg-warmbg min-h-[500px]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Grid of Cards -->
+      <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.map((post) => (
+          <div
+            class="post-item-wrapper"
+            data-title={post.title.toLowerCase()}
+            data-excerpt={post.excerpt.toLowerCase()}
+            data-tags={post.tags.join(',')}
+          >
+            <BlogCard post={post} />
+          </div>
+        ))}
+      </div>
+
+      <!-- Empty State when filtered results are 0 -->
+      <div id="empty-state" class="hidden text-center py-20">
+        <div class="text-5xl mb-4">🥣</div>
+        <h3 class="font-display font-bold text-xl text-gray-800 mb-2">
+          Menu yang Bunda cari belum ditemukan
+        </h3>
+        <p class="text-sm text-gray-500 max-w-md mx-auto mb-6">
+          Coba gunakan kata kunci lain seperti 'daging', 'labu', 'tekstur', atau pilih filter kategori di atas.
+        </p>
+        <button
+          type="button"
+          id="reset-filter-btn"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-600 text-white font-bold text-xs"
+        >
+          Reset Pencarian
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Floating Help Banner for Ibu Rumah Tangga -->
+  <section class="py-12 bg-white border-t border-brand-100">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+      <div>
+        <h3 class="font-display font-bold text-xl text-gray-900">
+          Punya Pertanyaan Spesifik tentang MPASI Bayi Bunda?
+        </h3>
+        <p class="text-sm text-gray-600 mt-1">
+          Konsultasikan langsung dengan tim ahli nutrisi MPASI BERGIZI via WhatsApp gratis!
+        </p>
+      </div>
+      <a
+        href="https://wa.me/?text=Halo%20Admin%20MPASI%20Bergizi,%20saya%20mau%20tanya%20menu%20resep%20si%20kecil"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-peach-500 hover:bg-peach-600 text-white font-bold text-xs uppercase tracking-wider shadow-md hover:-translate-y-0.5 transition-all flex-shrink-0"
+      >
+        <span>Tanya Resep di WhatsApp</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Client-side search and tag filtering
+  const searchInput = document.getElementById('blog-search-input') as HTMLInputElement | null;
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('.tag-filter-btn');
+  const postWrappers = document.querySelectorAll<HTMLElement>('.post-item-wrapper');
+  const emptyState = document.getElementById('empty-state');
+  const resetBtn = document.getElementById('reset-filter-btn');
+
+  let activeTag = 'all';
+  let searchQuery = '';
+
+  // Check URL query param for initial tag
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialTag = urlParams.get('tag');
+  if (initialTag) {
+    activeTag = initialTag;
+    filterButtons.forEach((btn) => {
+      if (btn.dataset.tag === initialTag) {
+        setButtonActive(btn);
+      }
+    });
+  }
+
+  function filterPosts() {
+    let visibleCount = 0;
+
+    postWrappers.forEach((wrapper) => {
+      const title = wrapper.dataset.title || '';
+      const excerpt = wrapper.dataset.excerpt || '';
+      const tags = (wrapper.dataset.tags || '').split(',');
+
+      const matchesSearch =
+        searchQuery === '' ||
+        title.includes(searchQuery) ||
+        excerpt.includes(searchQuery);
+
+      const matchesTag =
+        activeTag === 'all' || tags.includes(activeTag);
+
+      if (matchesSearch && matchesTag) {
+        wrapper.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        wrapper.classList.add('hidden');
+      }
+    });
+
+    if (emptyState) {
+      if (visibleCount === 0) {
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+      }
+    }
+  }
+
+  function setButtonActive(activeBtn: HTMLButtonElement) {
+    filterButtons.forEach((b) => {
+      b.classList.remove('bg-brand-600', 'text-white');
+      b.classList.add('bg-white', 'text-gray-700');
+    });
+    activeBtn.classList.remove('bg-white', 'text-gray-700');
+    activeBtn.classList.add('bg-brand-600', 'text-white');
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = (e.target as HTMLInputElement).value.toLowerCase().trim();
+      filterPosts();
+    });
+  }
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag || 'all';
+      activeTag = tag;
+      setButtonActive(btn);
+      filterPosts();
+    });
+  });
+
+  if (resetBtn && searchInput) {
+    resetBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      searchQuery = '';
+      activeTag = 'all';
+      filterButtons.forEach((b) => {
+        if (b.dataset.tag === 'all') setButtonActive(b);
+      });
+      filterPosts();
+    });
+  }
+
+  // Initial run
+  filterPosts();
+</script>

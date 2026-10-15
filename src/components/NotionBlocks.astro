@@ -1,0 +1,183 @@
+---
+// src/components/NotionBlocks.astro
+import type { NotionBlock } from '../lib/notion';
+
+export interface Props {
+  blocks: NotionBlock[];
+}
+
+const { blocks = [] } = Astro.props;
+
+// Helper untuk merender RichText dengan format bold, italic, link rel="noopener", dll.
+function renderRichText(richTextArray: any[] = []): string {
+  if (!richTextArray || richTextArray.length === 0) return '';
+
+  return richTextArray
+    .map((item) => {
+      let text = item.plain_text || '';
+      
+      // Escape HTML entities to prevent XSS
+      text = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      const annotations = item.annotations || {};
+
+      if (annotations.bold) text = `<strong class="font-bold text-gray-950">${text}</strong>`;
+      if (annotations.italic) text = `<em class="italic">${text}</em>`;
+      if (annotations.strikethrough) text = `<s class="line-through">${text}</s>`;
+      if (annotations.underline) text = `<u class="underline">${text}</u>`;
+      if (annotations.code) text = `<code class="bg-brand-50 text-brand-700 px-1.5 py-0.5 rounded text-sm font-mono">${text}</code>`;
+
+      if (item.href) {
+        text = `<a href="${item.href}" target="_blank" rel="noopener noreferrer" class="text-brand-600 underline font-semibold hover:text-peach-600 transition-colors">${text}</a>`;
+      }
+
+      return text;
+    })
+    .join('');
+}
+---
+
+<div class="prose-mpasi max-w-none space-y-5">
+  {blocks.map((block) => {
+    const { type, id } = block;
+
+    // Heading 1
+    if (type === 'heading_1') {
+      return (
+        <h2 id={`heading-${id}`} class="text-2xl sm:text-3xl font-display font-extrabold text-gray-900 pt-6 pb-2 border-b border-brand-100">
+          <Fragment set:html={renderRichText(block.heading_1?.rich_text)} />
+        </h2>
+      );
+    }
+
+    // Heading 2
+    if (type === 'heading_2') {
+      return (
+        <h2 id={`heading-${id}`} class="text-xl sm:text-2xl font-display font-bold text-brand-800 pt-4 pb-1">
+          <Fragment set:html={renderRichText(block.heading_2?.rich_text)} />
+        </h2>
+      );
+    }
+
+    // Heading 3
+    if (type === 'heading_3') {
+      return (
+        <h3 id={`heading-${id}`} class="text-lg sm:text-xl font-display font-semibold text-gray-800 pt-2 pb-1">
+          <Fragment set:html={renderRichText(block.heading_3?.rich_text)} />
+        </h3>
+      );
+    }
+
+    // Paragraph
+    if (type === 'paragraph') {
+      const content = renderRichText(block.paragraph?.rich_text);
+      if (!content) return <div class="h-2" />;
+      return (
+        <p class="text-gray-700 leading-relaxed">
+          <Fragment set:html={content} />
+        </p>
+      );
+    }
+
+    // Bulleted List Item
+    if (type === 'bulleted_list_item') {
+      return (
+        <div class="flex items-start gap-3 my-1">
+          <span class="w-2 h-2 rounded-full bg-brand-500 mt-2.5 flex-shrink-0" />
+          <div class="text-gray-700 leading-relaxed flex-1">
+            <Fragment set:html={renderRichText(block.bulleted_list_item?.rich_text)} />
+          </div>
+        </div>
+      );
+    }
+
+    // Numbered List Item
+    if (type === 'numbered_list_item') {
+      return (
+        <div class="flex items-start gap-3 my-1.5">
+          <span class="w-6 h-6 rounded-full bg-brand-100 text-brand-700 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
+            •
+          </span>
+          <div class="text-gray-700 leading-relaxed flex-1">
+            <Fragment set:html={renderRichText(block.numbered_list_item?.rich_text)} />
+          </div>
+        </div>
+      );
+    }
+
+    // Quote
+    if (type === 'quote') {
+      return (
+        <blockquote class="border-l-4 border-brand-500 bg-brand-50/70 p-5 rounded-r-2xl my-6 text-brand-900 font-medium italic shadow-sm">
+          <Fragment set:html={renderRichText(block.quote?.rich_text)} />
+        </blockquote>
+      );
+    }
+
+    // Callout
+    if (type === 'callout') {
+      const emoji = block.callout?.icon?.emoji || '💡';
+      return (
+        <div class="flex items-start gap-4 p-5 rounded-2xl bg-amber-50/80 border border-amber-200/80 my-6 shadow-sm">
+          <span class="text-2xl flex-shrink-0">{emoji}</span>
+          <div class="text-amber-950 font-medium text-sm leading-relaxed flex-1">
+            <Fragment set:html={renderRichText(block.callout?.rich_text)} />
+          </div>
+        </div>
+      );
+    }
+
+    // Image (with loading="lazy" and alt text from caption)
+    if (type === 'image') {
+      const imageUrl =
+        block.image?.type === 'external'
+          ? block.image.external?.url
+          : block.image?.file?.url;
+      const caption = block.image?.caption?.[0]?.plain_text || 'Foto Resep MPASI Bergizi';
+
+      return (
+        <figure class="my-8 text-center">
+          <div class="overflow-hidden rounded-3xl shadow-lg border border-gray-100 bg-gray-50">
+            <img
+              src={imageUrl}
+              alt={caption}
+              loading="lazy"
+              class="w-full max-h-[500px] object-cover mx-auto"
+            />
+          </div>
+          {caption && (
+            <figcaption class="mt-2 text-xs font-medium text-gray-500 italic">
+              {caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    }
+
+    // Code
+    if (type === 'code') {
+      const codeText = block.code?.rich_text?.[0]?.plain_text || '';
+      const language = block.code?.language || 'text';
+      return (
+        <div class="my-6 rounded-2xl overflow-hidden bg-gray-900 text-gray-100 shadow-md">
+          <div class="px-4 py-2 bg-gray-800 text-xs font-mono text-gray-400 border-b border-gray-700 flex justify-between items-center">
+            <span>{language}</span>
+          </div>
+          <pre class="p-4 text-sm font-mono overflow-x-auto leading-relaxed">
+            <code>{codeText}</code>
+          </pre>
+        </div>
+      );
+    }
+
+    // Divider
+    if (type === 'divider') {
+      return <hr class="my-8 border-t-2 border-brand-100" />;
+    }
+
+    return null;
+  })}
+</div>

@@ -1,0 +1,89 @@
+---
+// src/components/BlogCard.astro
+import type { BlogPost } from '../lib/notion';
+
+export interface Props {
+  post: BlogPost;
+}
+
+const { post } = Astro.props;
+const postUrl = `/blog/${post.slug}`;
+---
+
+<article class="group bg-white rounded-3xl overflow-hidden border border-brand-100/80 shadow-soft hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full">
+  
+  <!-- Image Container -->
+  <a href={postUrl} class="relative block overflow-hidden aspect-[16/10] bg-brand-50" tabindex="-1">
+    <img
+      src={post.cover}
+      alt={`${post.title} - MPASI BERGIZI`}
+      loading="lazy"
+      width="600"
+      height="375"
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    
+    <!-- Primary Tag Badge Overlay -->
+    {post.tags?.[0] && (
+      <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-white/95 text-brand-700 shadow-sm backdrop-blur-sm">
+        {post.tags[0]}
+      </span>
+    )}
+  </a>
+
+  <!-- Content Body -->
+  <div class="p-6 sm:p-7 flex flex-col flex-1">
+    
+    <!-- Meta Info: Date & Reading Time -->
+    <div class="flex items-center justify-between text-xs font-medium text-gray-500 mb-3">
+      <div class="flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        <time datetime={post.date}>{post.formattedDate}</time>
+      </div>
+      <div class="flex items-center gap-1 text-peach-600 font-semibold">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span>{post.readingTime}</span>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <h3 class="font-display font-bold text-lg sm:text-xl text-gray-900 group-hover:text-brand-600 transition-colors line-clamp-2 leading-snug mb-3">
+      <a href={postUrl}>
+        {post.title}
+      </a>
+    </h3>
+
+    <!-- Excerpt -->
+    <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed mb-6 flex-1">
+      {post.excerpt}
+    </p>
+
+    <!-- Card Footer -->
+    <div class="pt-4 border-t border-gray-100 flex items-center justify-between mt-auto">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-full bg-brand-100 text-brand-700 font-bold text-xs flex items-center justify-center">
+          {post.author.slice(0, 1)}
+        </div>
+        <span class="text-xs font-semibold text-gray-700 truncate max-w-[130px]">
+          {post.author}
+        </span>
+      </div>
+
+      <a
+        href={postUrl}
+        class="inline-flex items-center gap-1 text-xs font-bold text-brand-600 group-hover:text-peach-600 transition-colors"
+      >
+        <span>Baca Menu</span>
+        <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</article>

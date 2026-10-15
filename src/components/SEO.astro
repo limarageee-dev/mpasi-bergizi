@@ -1,0 +1,132 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  type?: 'website' | 'article';
+  author?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  tags?: string[];
+  schema?: Record<string, any>;
+}
+
+const {
+  title = 'MPASI BERGIZI - Solusi Menu Praktis & Nutrisi Lengkap Bayi untuk Ibu Rumah Tangga',
+  description = 'Kumpulan resep MPASI bergizi, menu praktis 4 bintang, dan panduan meal prep harian untuk ibu rumah tangga. Mencegah GTM dan optimalkan berat badan si kecil.',
+  image = 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=80',
+  canonical,
+  type = 'website',
+  author = 'MPASI BERGIZI Team',
+  publishedTime,
+  modifiedTime,
+  tags = [],
+  schema,
+} = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://mpasi-bergizi.vercel.app';
+const currentCanonical = canonical || new URL(Astro.url.pathname, siteUrl).toString();
+const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
+
+// Schema.org Default Organization
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'MPASI BERGIZI',
+  url: siteUrl,
+  logo: `${siteUrl}/favicon.svg`,
+  description: 'Penyedia solusi menu MPASI praktis bergizi lengkap dan edukasi nutrisi untuk ibu rumah tangga di Indonesia.',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'Customer Support',
+    availableLanguage: 'Indonesian',
+  },
+};
+
+// BreadcrumbList Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Beranda',
+      item: siteUrl,
+    },
+    ...(Astro.url.pathname.includes('/blog')
+      ? [
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Blog Resep & Nutrisi',
+            item: `${siteUrl}/blog`,
+          },
+        ]
+      : []),
+    ...(type === 'article'
+      ? [
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: title.replace(' | MPASI BERGIZI', ''),
+            item: currentCanonical,
+          },
+        ]
+      : []),
+  ],
+};
+---
+
+<!-- Technical Meta Tags -->
+<title>{title}</title>
+<meta name="description" content={description.slice(0, 160)} />
+<link rel="canonical" href={currentCanonical} />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#7B2B80" />
+<meta name="author" content={author} />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Google Fonts Preconnect for High Performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:site_name" content="MPASI BERGIZI" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description.slice(0, 160)} />
+<meta property="og:image" content={fullImageUrl} />
+<meta property="og:image:alt" content={title} />
+<meta property="og:url" content={currentCanonical} />
+<meta property="og:type" content={type} />
+<meta property="og:locale" content="id_ID" />
+
+{type === 'article' && publishedTime && (
+  <meta property="article:published_time" content={publishedTime} />
+)}
+{type === 'article' && modifiedTime && (
+  <meta property="article:modified_time" content={modifiedTime} />
+)}
+{type === 'article' && author && (
+  <meta property="article:author" content={author} />
+)}
+{type === 'article' && tags.map((tag) => (
+  <meta property="article:tag" content={tag} />
+))}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description.slice(0, 160)} />
+<meta name="twitter:image" content={fullImageUrl} />
+<meta name="twitter:image:alt" content={title} />
+
+<!-- Schema.org JSON-LD Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+{schema && (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+)}

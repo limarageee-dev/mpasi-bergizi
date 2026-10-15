@@ -1,0 +1,73 @@
+---
+// src/layouts/Layout.astro
+import SEO from '../components/SEO.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  type?: 'website' | 'article';
+  author?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  tags?: string[];
+  schema?: Record<string, any>;
+}
+
+const {
+  title,
+  description,
+  image,
+  canonical,
+  type = 'website',
+  author,
+  publishedTime,
+  modifiedTime,
+  tags,
+  schema,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <SEO
+      title={title}
+      description={description}
+      image={image}
+      canonical={canonical}
+      type={type}
+      author={author}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+      tags={tags}
+      schema={schema}
+    />
+  </head>
+  <body class="min-h-screen flex flex-col bg-warmbg text-[#2D2833] antialiased selection:bg-brand-600 selection:text-white font-sans">
+    
+    <!-- Top Announcement Bar -->
+    <aside aria-label="Pengumuman Penting" class="bg-gradient-to-r from-brand-700 via-brand-600 to-peach-600 text-white text-xs py-2 px-4 text-center font-medium shadow-sm">
+      <div class="max-w-7xl mx-auto flex items-center justify-center gap-2">
+        <span class="bg-white/20 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase">Menu Baru</span>
+        <span>✨ Paket MPASI Praktis 4 Bintang Edisi Spesial Siap Saji!</span>
+        <a href="#cta-section" class="underline font-bold hover:text-honey-200 ml-1">Pesan Sekarang &rarr;</a>
+      </div>
+    </aside>
+
+    <Navbar />
+
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <Footer />
+
+  </body>
+</html>
