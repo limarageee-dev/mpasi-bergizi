@@ -21,8 +21,17 @@ export interface NotionBlock {
 }
 
 // Inisialisasi Notion Client
-const NOTION_TOKEN = import.meta.env.NOTION_TOKEN || process.env.NOTION_TOKEN;
-const NOTION_DATABASE_ID = import.meta.env.NOTION_DATABASE_ID || process.env.NOTION_DATABASE_ID;
+const NOTION_TOKEN =
+  process.env.NOTION_TOKEN ||
+  import.meta.env.NOTION_TOKEN ||
+  process.env.PUBLIC_NOTION_TOKEN ||
+  import.meta.env.PUBLIC_NOTION_TOKEN;
+
+const NOTION_DATABASE_ID =
+  process.env.NOTION_DATABASE_ID ||
+  import.meta.env.NOTION_DATABASE_ID ||
+  process.env.PUBLIC_NOTION_DATABASE_ID ||
+  import.meta.env.PUBLIC_NOTION_DATABASE_ID;
 
 export const isNotionConfigured = Boolean(
   NOTION_TOKEN &&
@@ -316,34 +325,48 @@ export async function getAllPosts(): Promise<BlogPost[]> {
       return MOCK_POSTS;
     }
 
-    // Filter halaman yang berstatus published (case-insensitive: 'published' atau 'Published')
+    // Filter halaman yang sah:
+    // 1. Wajib memiliki judul (bukan baris kosong di tabel Notion)
+    // 2. Berstatus 'published' jika kolom status diisi
     const activePages = response.results.filter((page: any) => {
+      const titleProp = getProp(page.properties, 'title', 'Title', 'name', 'Name');
+      const titleText = titleProp?.title?.[0]?.plain_text?.trim();
+      if (!titleText) {
+        return false; // Abaikan baris kosong di tabel Notion
+      }
+
       const statusProp = getProp(page.properties, 'status', 'Status');
       const statusName = statusProp?.select?.name?.toLowerCase();
       if (statusName) {
         return statusName === 'published';
       }
-      return true; // jika tidak ada properti status, tetap tampilkan
+      return true; // jika tidak ada properti status, tetap tampilkan selama judul ada
     });
 
     if (activePages.length === 0) {
-      console.warn('[Notion CMS] Tidak ada artikel dengan status "published". Menampilkan data demo.');
+      console.warn('[Notion CMS] Tidak ada artikel dengan judul valid dan status "published". Menampilkan data demo.');
       return MOCK_POSTS;
     }
 
-    const posts: BlogPost[] = activePages.map((page: any) => {
+    const usedSlugs = new Set<string>();
+
+    const posts: BlogPost[] = activePages.map((page: any, index: number) => {
       const props = page.properties;
 
       // Title
       const titleProp = getProp(props, 'title', 'Title', 'name', 'Name');
       const title =
-        titleProp?.title?.[0]?.plain_text ||
+        titleProp?.title?.[0]?.plain_text?.trim() ||
         'Menu MPASI Bergizi';
 
       // Slug
       const slugProp = getProp(props, 'slug', 'Slug');
       const rawSlug = slugProp?.rich_text?.[0]?.plain_text || title;
-      const cleanSlug = slugify(rawSlug);
+      let cleanSlug = slugify(rawSlug) || `menu-${index + 1}`;
+      if (usedSlugs.has(cleanSlug)) {
+        cleanSlug = `${cleanSlug}-${index + 1}`;
+      }
+      usedSlugs.add(cleanSlug);
 
       // Date
       const dateProp = getProp(props, 'date', 'Date');
