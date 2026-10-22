@@ -2,6 +2,7 @@
 // src/components/Navbar.astro
 const navLinks = [
   { name: 'Beranda', href: '/' },
+  { name: 'Koleksi Produk', href: '/#produk-section' },
   { name: 'Resep & Menu Blog', href: '/blog' },
   { name: 'Tentang MPASI', href: '/about' },
 ];
@@ -9,22 +10,20 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 glass-nav border-b border-brand-100/70 transition-all duration-300">
+<header class="sticky top-0 z-50 glass-nav border-b border-orange-100/80 transition-all duration-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
       
       <!-- Brand Logo -->
-      <a href="/" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-brand-500 rounded-xl p-1">
-        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-600 via-brand-500 to-peach-500 flex items-center justify-center text-white shadow-md shadow-brand-600/30 group-hover:scale-105 transition-transform">
-          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5l4 2.5-4 2.5z"/>
-          </svg>
+      <a href="/" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-orange-400 rounded-xl p-1">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-orange-600 via-orange-500 to-amber-400 flex items-center justify-center text-white shadow-md shadow-orange-500/25 group-hover:scale-105 transition-transform overflow-hidden">
+          <img src="/images/baby-mascot-hedgie.jpg" alt="Logo MPASI Bergizi" class="w-full h-full object-cover" />
         </div>
         <div class="flex flex-col">
-          <span class="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-brand-700 leading-none group-hover:text-brand-800 transition-colors">
-            MPASI <span class="text-peach-500">BERGIZI</span>
+          <span class="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-gray-900 leading-none group-hover:text-orange-600 transition-colors">
+            MPASI <span class="text-orange-500">BERGIZI</span>
           </span>
-          <span class="text-[11px] font-semibold text-gray-500 tracking-wider uppercase mt-1">
+          <span class="text-[11px] font-semibold text-gray-400 tracking-wider uppercase mt-1">
             Menu Praktis Ibu Rumah Tangga
           </span>
         </div>
@@ -33,19 +32,19 @@ const currentPath = Astro.url.pathname;
       <!-- Desktop Navigation Links -->
       <nav class="hidden md:flex items-center gap-8" aria-label="Navigasi Utama">
         {navLinks.map((link) => {
-          const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+          const isActive = currentPath === link.href;
           return (
             <a
               href={link.href}
               class={`text-sm font-semibold transition-all duration-200 relative py-1 ${
                 isActive
-                  ? 'text-brand-600 font-bold'
-                  : 'text-gray-600 hover:text-brand-600'
+                  ? 'text-orange-600 font-bold'
+                  : 'text-gray-600 hover:text-orange-600'
               }`}
             >
               {link.name}
               {isActive && (
-                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-brand-600 rounded-full animate-fade-in" />
+                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-orange-500 rounded-full animate-fade-in" />
               )}
             </a>
           );
@@ -56,7 +55,7 @@ const currentPath = Astro.url.pathname;
       <div class="hidden md:flex items-center gap-4">
         <a
           href="#cta-section"
-          class="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-extrabold px-5 py-2.5 rounded-full bg-brand-600 text-white shadow-md shadow-brand-600/25 hover:bg-brand-700 hover:shadow-brand-600/35 hover:-translate-y-0.5 transition-all duration-200"
+          class="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-extrabold px-6 py-3 rounded-full bg-orange-500 text-white shadow-md shadow-orange-500/25 hover:bg-orange-600 hover:shadow-orange-500/35 hover:-translate-y-0.5 transition-all duration-200"
           id="nav-cta-btn"
         >
           <span>Pilih Menu Si Kecil</span>

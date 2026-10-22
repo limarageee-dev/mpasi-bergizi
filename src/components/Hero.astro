@@ -1,46 +1,57 @@
 ---
 // src/components/Hero.astro
+// Desain Landing Page Modern & Minimalis Terinspirasi Gambar 3 (Hedgie Style)
+// Tema: Oren Mix Putih dengan Maskot Koki Cilik 3D Peeking & Floating Search Bar
 ---
 
-<section class="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden bg-gradient-to-b from-brand-50/70 via-warmbg to-warmbg">
+<section class="relative pt-12 pb-16 md:pt-20 md:pb-24 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-white to-[#FFF8F3]">
   
-  <!-- Colorful Decorative Elements -->
-  <div class="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 pointer-events-none overflow-hidden">
-    <div class="absolute -top-10 -right-10 w-80 h-80 bg-peach-400/20 rounded-full blur-3xl"></div>
-    <div class="absolute top-20 -left-10 w-96 h-96 bg-brand-400/20 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-honey-400/20 rounded-full blur-3xl"></div>
+  <!-- Subtle Organic Ambient Glowing Orbs -->
+  <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-orange-200/25 rounded-full blur-[110px] pointer-events-none"></div>
+  <div class="absolute top-20 right-10 w-[450px] h-[450px] bg-amber-200/20 rounded-full blur-[100px] pointer-events-none"></div>
+  <div class="absolute bottom-10 left-10 w-[400px] h-[400px] bg-orange-100/30 rounded-full blur-[90px] pointer-events-none"></div>
+
+  <!-- Floating 3D Sparkle Decorative Badges (Inspired by Hedgie) -->
+  <div class="absolute top-28 left-8 sm:left-24 w-12 h-12 rounded-2xl bg-white shadow-xl shadow-orange-500/10 border border-orange-100 flex items-center justify-center text-orange-400 text-xl font-bold animate-bounce-subtle pointer-events-none hidden sm:flex">
+    ✦
+  </div>
+  <div class="absolute top-24 right-12 sm:right-28 w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-50 to-white shadow-xl shadow-orange-500/10 border border-orange-100 flex items-center justify-center text-amber-500 text-2xl font-bold pointer-events-none hidden sm:flex">
+    ✦
   </div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+    
+    <!-- Top Grid: Text Left & Peeking Mascot Right -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end pt-4 pb-8">
       
-      <!-- Left Content Column -->
+      <!-- Left Column: Title & Subtitle -->
       <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
         
         <!-- Trust Pill Badge -->
-        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white shadow-sm border border-brand-200/60 text-xs font-bold text-brand-700">
+        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white shadow-sm border border-orange-200 text-xs font-bold text-orange-700">
           <span class="flex h-2.5 w-2.5 relative">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-peach-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-peach-500"></span>
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500"></span>
           </span>
           <span>Solusi No. 1 Menu Praktis untuk Ibu Rumah Tangga</span>
         </div>
 
-        <!-- Single Primary H1 for Homepage SEO -->
-        <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-gray-900 leading-[1.15]">
-          Solusi <span class="text-gradient-brand">MPASI Bergizi</span> & Menu Praktis Harian Si Kecil
+        <!-- Primary H1: "MPASI Praktis dan Bergizi untuk si Kecil" (Direct User Request) -->
+        <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-[3.8rem] tracking-tight text-gray-900 leading-[1.12]">
+          MPASI Praktis dan <br class="hidden sm:inline" />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-orange-500 to-amber-500">Bergizi untuk si Kecil.</span>
         </h1>
 
         <!-- Engaging Subtitle -->
-        <p class="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-          Gak perlu pusing lagi mikirin menu tiap pagi! Hadirkan nutrisi 4 bintang lengkap tinggi zat besi, cegah GTM, dan buat si kecil makan lahap hanya dalam 15 menit.
+        <p class="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
+          Kremesan double prohe otak sapi alami anti GTM untuk tumbuh kembang optimal, booster berat badan, dan kecerdasan otak si kecil setiap hari.
         </p>
 
-        <!-- CTA Utama Button (Direct from Prompt) -->
+        <!-- CTA Action Buttons -->
         <div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
           <a
             href="#cta-section"
-            class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-brand-600 text-white font-extrabold text-sm sm:text-base tracking-wide uppercase shadow-xl shadow-brand-600/35 hover:bg-brand-700 hover:shadow-brand-600/50 hover:-translate-y-1 active:translate-y-0 transition-all duration-200 text-center"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-black text-sm sm:text-base tracking-wide uppercase shadow-xl shadow-orange-500/25 hover:shadow-orange-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 text-center"
             id="hero-primary-cta"
           >
             <span>KLIK LINK DIBIO DAN PILIH MENU FAVORIT SIKECIL</span>
@@ -50,86 +61,38 @@
           </a>
 
           <a
-            href="/blog"
-            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-white hover:bg-brand-50 border-2 border-brand-200 text-brand-700 font-bold text-sm transition-all duration-200 shadow-sm"
+            href="#produk-section"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-white hover:bg-orange-50 border-2 border-orange-200 text-orange-600 font-bold text-sm transition-all duration-200 shadow-sm"
           >
-            <span>Lihat Resep Gratis</span>
-            <span class="text-xs bg-peach-100 text-peach-600 px-2 py-0.5 rounded-full font-extrabold">20+ Menu</span>
+            <span>Lihat Produk Kremesan</span>
+            <span class="text-xs bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full font-extrabold">Otak Sapi</span>
           </a>
-        </div>
-
-        <!-- Social Proof Key Stats -->
-        <div class="pt-6 border-t border-brand-100/80 grid grid-cols-3 gap-4 text-center lg:text-left max-w-md mx-auto lg:mx-0">
-          <div>
-            <div class="font-display font-extrabold text-2xl sm:text-3xl text-brand-700">10k+</div>
-            <div class="text-xs font-semibold text-gray-500 mt-0.5">Ibu Terbantu</div>
-          </div>
-          <div>
-            <div class="font-display font-extrabold text-2xl sm:text-3xl text-peach-500">100%</div>
-            <div class="text-xs font-semibold text-gray-500 mt-0.5">Bahan Alami</div>
-          </div>
-          <div>
-            <div class="font-display font-extrabold text-2xl sm:text-3xl text-emerald-600">0 GTM</div>
-            <div class="text-xs font-semibold text-gray-500 mt-0.5">Anak Lahap</div>
-          </div>
         </div>
 
       </div>
 
-      <!-- Right Visual Column (Modern Colorful Card Composition with Mascot) -->
-      <div class="lg:col-span-5 relative">
-        <div class="relative mx-auto max-w-md lg:max-w-none">
+      <!-- Right Column: Hedgie-Style Peeking 3D Mascot Character -->
+      <div class="lg:col-span-5 relative flex justify-center lg:justify-end">
+        <div class="relative w-72 sm:w-84 lg:w-96">
           
-          <!-- Main Food Highlight Card -->
-          <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-white border-4 border-white ring-2 ring-orange-100 transition-all duration-300 hover:shadow-orange-500/20">
+          <!-- Soft Background Glow behind mascot -->
+          <div class="absolute inset-0 bg-gradient-to-t from-orange-400/30 via-amber-300/20 to-transparent rounded-full blur-2xl transform scale-90 translate-y-6"></div>
+          
+          <!-- Cute Mascot Card with Rounded Top & Smooth Edge -->
+          <div class="relative rounded-t-3xl overflow-hidden shadow-2xl border-4 border-b-0 border-white bg-white group">
             <img
-              src="/images/hero-mpasi-mascot.jpg"
-              alt="Desain Produk MPASI Bergizi - Maskot Koki Bayi Lucu Tema Oranye dan Putih"
-              width="600"
+              src="/images/baby-mascot-hedgie.jpg"
+              alt="Maskot Koki Cilik MPASI Bergizi Peeking Hedgie Style"
+              width="450"
               height="450"
-              class="w-full h-80 sm:h-96 object-cover hover:scale-105 transition-transform duration-700 ease-out"
+              class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               loading="eager"
             />
             
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            
-            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-white/60 shadow-lg">
-              <div class="flex items-center justify-between">
-                <div>
-                  <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-orange-600 bg-orange-50 px-2.5 py-0.5 rounded-full mb-1 border border-orange-200/50">
-                    <span class="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
-                    Desain Produk MPASI Baru
-                  </span>
-                  <p class="font-display font-bold text-gray-900 text-sm sm:text-base">
-                    Puree Labu Kuning & Wortel Organik
-                  </p>
-                </div>
-                <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center text-xl shadow-sm">
-                  🥣
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Floating Badge 1: Karakter Maskot Minimalis Lucu -->
-          <div class="absolute -top-6 -left-6 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-orange-100 flex items-center gap-3 animate-bounce-subtle">
-            <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-orange-500 to-amber-400 text-white flex items-center justify-center font-bold text-xl shadow-md shadow-orange-500/20">
-              👶
-            </div>
-            <div>
-              <div class="text-xs font-bold text-gray-800">Maskot Koki Cilik</div>
-              <div class="text-[11px] text-orange-600 font-semibold">Tema Oren Mix Putih</div>
-            </div>
-          </div>
-
-          <!-- Floating Badge 2: 100% Organik & Anti GTM -->
-          <div class="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-orange-100 flex items-center gap-3">
-            <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-xl shadow-sm">
-              🥕
-            </div>
-            <div>
-              <div class="text-xs font-bold text-gray-800">Nutrisi 4 Bintang</div>
-              <div class="text-[11px] text-gray-500 font-semibold">Tekstur Lembut Anti GTM</div>
+            <!-- Cute Floating Tag on Mascot -->
+            <div class="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md shadow-md border border-orange-100 text-xs font-bold text-orange-600 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-orange-500 animate-ping"></span>
+              <span>Koki Cilik MPASI</span>
             </div>
           </div>
 
@@ -137,5 +100,110 @@
       </div>
 
     </div>
+
+    <!-- Center Floating Action / Search Bar (Directly Inspired by Gambar 3 Hedgie Prompt Bar) -->
+    <div class="max-w-4xl mx-auto -mt-3 mb-16 relative z-20">
+      <form action="/blog" method="get" class="relative flex items-center bg-white rounded-full p-2.5 sm:p-3 shadow-2xl shadow-orange-500/15 border-2 border-orange-100 hover:border-orange-300 transition-all group">
+        
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 text-lg flex-shrink-0 ml-1">
+          ✦
+        </div>
+
+        <input
+          type="text"
+          name="q"
+          placeholder="Cari menu praktis si kecil, resep anti GTM, atau booster BB..."
+          class="w-full px-4 text-sm sm:text-base text-gray-800 placeholder-gray-400 bg-transparent focus:outline-none font-medium"
+        />
+
+        <button
+          type="submit"
+          aria-label="Cari menu"
+          class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-orange-600 to-orange-500 hover:from-orange-700 hover:to-orange-600 text-white flex items-center justify-center shadow-md shadow-orange-500/30 hover:scale-105 active:scale-95 transition-all flex-shrink-0 mr-1"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- Bottom: 3 Feature Cards (Identical Layout to Gambar 3 Hedgie 3 Feature Cards) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 pt-4">
+      
+      <!-- Card 1: Double Prohe Alami -->
+      <a href="#produk-section" class="group p-6 sm:p-7 rounded-3xl bg-white border border-orange-100/80 shadow-soft hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+        <div>
+          <!-- Icon in Soft Orange Container -->
+          <div class="w-12 h-12 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            🥩
+          </div>
+          <h3 class="font-display font-bold text-lg sm:text-xl text-gray-900 group-hover:text-orange-600 transition-colors">
+            Double Prohe Alami
+          </h3>
+          <p class="text-xs sm:text-sm text-gray-500 mt-2 leading-relaxed">
+            Otak sapi grass-fed murni kaya zat besi, omega-3, dan asam folat untuk booster otak & berat badan.
+          </p>
+        </div>
+        <div class="pt-5 mt-4 border-t border-gray-100 flex items-center justify-between">
+          <span class="text-xs font-bold text-orange-600">Pelajari Produk</span>
+          <div class="w-8 h-8 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-all">
+            <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 2: Praktis Anti GTM -->
+      <a href="/blog" class="group p-6 sm:p-7 rounded-3xl bg-white border border-orange-100/80 shadow-soft hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+        <div>
+          <!-- Icon in Soft Amber Container -->
+          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            🥣
+          </div>
+          <h3 class="font-display font-bold text-lg sm:text-xl text-gray-900 group-hover:text-orange-600 transition-colors">
+            Praktis Anti GTM
+          </h3>
+          <p class="text-xs sm:text-sm text-gray-500 mt-2 leading-relaxed">
+            Tekstur renyah dan gurih alami yang disukai anak. Cukup tabur di atas bubur atau nasi hangat.
+          </p>
+        </div>
+        <div class="pt-5 mt-4 border-t border-gray-100 flex items-center justify-between">
+          <span class="text-xs font-bold text-orange-600">Lihat Resep & Tips</span>
+          <div class="w-8 h-8 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-all">
+            <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 3: Standar Gizi IDAI -->
+      <a href="/about" class="group p-6 sm:p-7 rounded-3xl bg-white border border-orange-100/80 shadow-soft hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+        <div>
+          <!-- Icon in Soft Mint Container -->
+          <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            🛡️
+          </div>
+          <h3 class="font-display font-bold text-lg sm:text-xl text-gray-900 group-hover:text-orange-600 transition-colors">
+            Standar Gizi IDAI
+          </h3>
+          <p class="text-xs sm:text-sm text-gray-500 mt-2 leading-relaxed">
+            Higienis tanpa MSG, tanpa pengawet buatan, dan aman untuk sistem pencernaan si kecil.
+          </p>
+        </div>
+        <div class="pt-5 mt-4 border-t border-gray-100 flex items-center justify-between">
+          <span class="text-xs font-bold text-orange-600">Tentang Kami</span>
+          <div class="w-8 h-8 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-all">
+            <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
   </div>
 </section>

@@ -5,24 +5,24 @@ export default {
     extend: {
       colors: {
         brand: {
-          50: '#FAF4FC',
-          100: '#F4E5F8',
-          200: '#EACBF2',
-          300: '#DBA6E7',
-          400: '#C273D6',
-          500: '#9E3AA7',
-          600: '#7B2B80', // WARNA BRAND UTAMA
-          700: '#641F69',
-          800: '#4E1852',
-          900: '#3D1240',
+          50: '#FFF8F3',
+          100: '#FFEDD5',
+          200: '#FED7AA',
+          300: '#FDBA74',
+          400: '#FB923C',
+          500: '#F97316', // WARNA UTAMA: Fresh Orange
+          600: '#EA580C', // WARNA UTAMA: Deep Orange
+          700: '#C2410C',
+          800: '#9A3412',
+          900: '#7C2D12',
         },
         peach: {
-          50: '#FFF5F3',
-          100: '#FFE8E4',
-          200: '#FFD5CE',
-          400: '#FF8A7A',
-          500: '#FF6F61',
-          600: '#E85446',
+          50: '#FFF7ED',
+          100: '#FFEDD5',
+          200: '#FED7AA',
+          400: '#FB923C',
+          500: '#F97316',
+          600: '#EA580C',
         },
         honey: {
           50: '#FFFBEB',
@@ -44,16 +44,16 @@ export default {
           400: '#38BDF8',
           500: '#0EA5E9',
         },
-        warmbg: '#FAF8F5',
+        warmbg: '#FCFBFA',
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
         display: ['"Outfit"', 'sans-serif'],
       },
       boxShadow: {
-        'soft': '0 4px 20px -2px rgba(123, 43, 128, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04)',
-        'card': '0 10px 30px -5px rgba(123, 43, 128, 0.1), 0 4px 10px -2px rgba(0, 0, 0, 0.04)',
-        'glow': '0 0 25px -5px rgba(123, 43, 128, 0.35)',
+        'soft': '0 4px 20px -2px rgba(234, 88, 12, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.03)',
+        'card': '0 10px 30px -5px rgba(234, 88, 12, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.03)',
+        'glow': '0 0 25px -5px rgba(249, 115, 22, 0.35)',
       },
       borderRadius: {
         '2xl': '1.25rem',

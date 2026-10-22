@@ -13,7 +13,7 @@
   }
 
   ::selection {
-    background-color: #7B2B80;
+    background-color: #EA580C;
     color: #FFFFFF;
   }
 }
@@ -21,15 +21,15 @@
 /* Custom modern utilities & animations */
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center font-bold px-7 py-3.5 rounded-full bg-brand-600 text-white shadow-lg shadow-brand-600/30 hover:bg-brand-700 hover:shadow-brand-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 text-center;
+    @apply inline-flex items-center justify-center font-bold px-7 py-3.5 rounded-full bg-brand-500 text-white shadow-lg shadow-brand-500/25 hover:bg-brand-600 hover:shadow-brand-600/35 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 text-center;
   }
 
   .btn-accent {
-    @apply inline-flex items-center justify-center font-bold px-7 py-3.5 rounded-full bg-peach-500 text-white shadow-lg shadow-peach-500/30 hover:bg-peach-600 hover:shadow-peach-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 text-center;
+    @apply inline-flex items-center justify-center font-bold px-7 py-3.5 rounded-full bg-brand-500 text-white shadow-lg shadow-brand-500/30 hover:bg-brand-600 hover:shadow-brand-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 text-center;
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center font-bold px-7 py-3.5 rounded-full border-2 border-brand-600 text-brand-600 hover:bg-brand-50 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 text-center;
+    @apply inline-flex items-center justify-center font-bold px-7 py-3.5 rounded-full border-2 border-brand-500 text-brand-600 hover:bg-brand-50 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 text-center;
   }
 
   .badge-tag {
@@ -43,7 +43,7 @@
 
 /* Glassmorphism effects */
 .glass-nav {
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
@@ -56,11 +56,11 @@
 
 /* Smooth gradient accents */
 .bg-gradient-brand {
-  background: linear-gradient(135deg, #7B2B80 0%, #A43FA9 60%, #FF6F61 100%);
+  background: linear-gradient(135deg, #EA580C 0%, #F97316 60%, #FBBF24 100%);
 }
 
 .text-gradient-brand {
-  background: linear-gradient(135deg, #7B2B80 0%, #9E3AA7 50%, #FF6F61 100%);
+  background: linear-gradient(135deg, #C2410C 0%, #EA580C 50%, #F97316 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
